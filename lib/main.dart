@@ -6,6 +6,7 @@ import 'package:loja_virtual_pro/models/carManager.dart';
 import 'package:loja_virtual_pro/models/productManager.dart';
 import 'package:loja_virtual_pro/models/userManager.dart';
 import 'package:loja_virtual_pro/screens/base/baseScreen.dart';
+import 'package:loja_virtual_pro/screens/cart/cartScreen.dart';
 import 'package:loja_virtual_pro/screens/login/loginScreen.dart';
 import 'package:loja_virtual_pro/screens/product/productScreen.dart';
 import 'package:loja_virtual_pro/screens/signUp/signUpScreen.dart';
@@ -61,9 +62,14 @@ class MyApp extends StatelessWidget {
             case '/signup':
               return MaterialPageRoute(builder: (_) => SignUpScreen());
 
+            case '/cart':
+              return MaterialPageRoute(builder: (_) => CartScreen());
+
             case '/base':
             default:
               return MaterialPageRoute(builder: (_) => BaseScreen());
+
+            
           }
         },
       ),

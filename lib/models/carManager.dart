@@ -7,4 +7,6 @@ class CartManager {
   void addToCart(Product product) {
     items.add(CartProduct.fromProduct(product));
   }
+
+  
 }

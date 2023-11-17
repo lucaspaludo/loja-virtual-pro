@@ -18,8 +18,10 @@ class UserData {
   late String password;
   late String confirmPassword;
 
-  // DocumentReference get firestoreRef =>
-  //     FirebaseFirestore.instance.doc('users/$id');
+  DocumentReference get firestoreRef =>
+      FirebaseFirestore.instance.doc('users/$id');
+
+  CollectionReference get cartReference => firestoreRef.collection('cart');
 
   Future<void> saveData() async {
     await FirebaseFirestore.instance.collection('users').doc(id).set(toMap());

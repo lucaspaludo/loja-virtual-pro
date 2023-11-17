@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>565388049264-h3u0ufjbnk0rcvdibtmccq40h0cd6g3c.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.565388049264-h3u0ufjbnk0rcvdibtmccq40h0cd6g3c</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCDmievpblEpe7rq4qWjIJWF7ydgR9wnrk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>565388049264</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>br.com.boarim.lojaVirtualPro</string>
+	<key>PROJECT_ID</key>
+	<string>loja-virtual-pro-b586a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>loja-virtual-pro-b586a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:565388049264:ios:d5dfea585c5e5b61c3edb5</string>
+</dict>
+</plist>

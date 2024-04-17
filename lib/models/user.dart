@@ -5,7 +5,7 @@ class UserData {
       {required this.email,
       required this.password,
       required this.name,
-      required this.id});
+      required this.id,});
 
   UserData.fromDocument(DocumentSnapshot document) {
     id = document.id;

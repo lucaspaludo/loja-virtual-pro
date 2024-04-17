@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:loja_virtual_pro/models/carManager.dart';
-import 'package:loja_virtual_pro/models/userManager.dart';
+import 'package:flutter/material.dart';
+import 'package:loja_virtual_pro/models/cart_manager.dart';
+import 'package:loja_virtual_pro/models/product.dart';
+import 'package:loja_virtual_pro/models/user_manager.dart';
+import 'package:loja_virtual_pro/screens/product/components/size_widget.dart';
 import 'package:provider/provider.dart';
-import '../../models/product.dart';
-import 'components/sizeWidget.dart';
 
 class ProductScreen extends StatelessWidget {
   final Product product;
@@ -36,7 +36,6 @@ class ProductScreen extends StatelessWidget {
                   return buildImage(urlImage, index);
                 },
                 options: CarouselOptions(
-                  autoPlay: false,
                   height: 350,
                 ),
               ),
@@ -48,7 +47,7 @@ class ProductScreen extends StatelessWidget {
                     Text(
                       product.name,
                       style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w600),
+                          fontSize: 20, fontWeight: FontWeight.w600,),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8),
@@ -73,7 +72,7 @@ class ProductScreen extends StatelessWidget {
                       child: Text(
                         'Descrição',
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                            fontSize: 16, fontWeight: FontWeight.w500,),
                       ),
                     ),
                     Text(
@@ -85,7 +84,7 @@ class ProductScreen extends StatelessWidget {
                       child: Text(
                         'Tamanhos',
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500),
+                            fontSize: 18, fontWeight: FontWeight.w500,),
                       ),
                     ),
                     Wrap(
@@ -126,18 +125,20 @@ class ProductScreen extends StatelessWidget {
                                     ? 'Adicionar ao carrinho'
                                     : 'Entre para Comprar',
                                 style: const TextStyle(
-                                    color: Colors.white, fontSize: 18),
+                                    color: Colors.white, fontSize: 18,),
                               ),
-                            ));
-                      }),
+                            ),);
+                      },),
                   ],
                 ),
               ),
             ],
-          )),
+          ),),
     );
   }
 }
+
+
 
 Widget buildImage(String urlImage, int index) {
   return Container(

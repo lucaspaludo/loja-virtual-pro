@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:loja_virtual_pro/common/customDrawer/customDrawer.dart';
-import 'package:loja_virtual_pro/screens/products/productsScreen.dart';
+import 'package:loja_virtual_pro/common/customDrawer/custom_drawer.dart';
+import 'package:loja_virtual_pro/models/page_manager.dart';
+import 'package:loja_virtual_pro/screens/home/home_screen.dart';
+import 'package:loja_virtual_pro/screens/products/products_screen.dart';
 import 'package:provider/provider.dart';
-
-import '../../models/pageManager.dart';
-import '../login/loginScreen.dart';
 
 class BaseScreen extends StatelessWidget {
   BaseScreen({super.key});
@@ -12,6 +11,7 @@ class BaseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: prefer_final_locals
     Color primaryColor = Theme.of(context).primaryColor;
     return Provider(
       create: (_) => PageManager(pageController),
@@ -19,16 +19,10 @@ class BaseScreen extends StatelessWidget {
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: <Widget>[
-          Scaffold(
-            drawer: CustomDrawer(),
-            appBar: AppBar(
-              title: const Text('Home1'),
-              backgroundColor: primaryColor,
-            ),
-          ),
+          const HomeScreen(),
           const ProductsScreen(),
           Scaffold(
-            drawer: CustomDrawer(),
+            drawer: const CustomDrawer(),
             appBar: AppBar(
               title: const Text('Home3'),
               backgroundColor: primaryColor,

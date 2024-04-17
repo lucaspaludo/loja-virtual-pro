@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:loja_virtual_pro/models/item_size.dart';
 import 'package:loja_virtual_pro/models/product.dart';
 
 class ProductManager extends ChangeNotifier {
@@ -31,6 +30,14 @@ class ProductManager extends ChangeNotifier {
     notifyListeners();
   }
 
+  Product? findProductById(String id){
+    try {
+      return allProducts.firstWhere((p) => p.id == id);
+    } catch (e){
+      return null;
+    }
+  }
+
   List<Product> get filteredProducts {
     final List<Product> filteredProducts = [];
 
@@ -38,7 +45,7 @@ class ProductManager extends ChangeNotifier {
       filteredProducts.addAll(allProducts);
     } else {
       filteredProducts.addAll(allProducts
-          .where((p) => p.name.toLowerCase().contains(search.toLowerCase())));
+          .where((p) => p.name.toLowerCase().contains(search.toLowerCase())),);
     }
     return filteredProducts;
   }

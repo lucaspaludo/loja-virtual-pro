@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:loja_virtual_pro/common/customDrawer/customDrawerHeader.dart';
-import 'package:loja_virtual_pro/common/customDrawer/drawerTile.dart';
+import 'package:loja_virtual_pro/common/customDrawer/custom_drawer_header.dart';
+import 'package:loja_virtual_pro/common/customDrawer/drawer_tile.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});

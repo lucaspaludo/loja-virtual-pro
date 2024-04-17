@@ -1,8 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:loja_virtual_pro/helpers/validators.dart';
 import 'package:loja_virtual_pro/models/user.dart';
-import 'package:loja_virtual_pro/models/userManager.dart';
+import 'package:loja_virtual_pro/models/user_manager.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -103,10 +102,10 @@ class LoginScreen extends StatelessWidget {
                                       .showSnackBar(SnackBar(
                                     content: Text('$e'),
                                     backgroundColor: Colors.red,
-                                  ));
+                                  ),);
                                 }, onSucess: () {
                                   Navigator.of(context).pop();
-                                });
+                                },);
                               }
                             },
                       child: userManager.loading
@@ -127,9 +126,12 @@ class LoginScreen extends StatelessWidget {
                     child: const Text(
                       'Esqueci minha senha',
                       style: TextStyle(color: Colors.black),
+                      
                     ),
+
                   ),
                 ),
+
               ),
             ),
           ),

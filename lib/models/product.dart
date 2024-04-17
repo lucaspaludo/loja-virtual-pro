@@ -48,5 +48,4 @@ class Product extends ChangeNotifier {
     
   }
 
-
 }

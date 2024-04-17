@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loja_virtual_pro/models/pageManager.dart';
+import 'package:loja_virtual_pro/models/page_manager.dart';
 import 'package:provider/provider.dart';
 
 class DrawerTile extends StatelessWidget {
@@ -11,7 +11,7 @@ class DrawerTile extends StatelessWidget {
       {super.key,
       required this.iconData,
       required this.title,
-      required this.page});
+      required this.page,});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class DrawerTile extends StatelessWidget {
               color: curPage == page ? primaryColor : Colors.grey[700],
             ),
           )
-        ]),
+        ],),
       ),
     );
   }

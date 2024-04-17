@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual_pro/models/item_size.dart';
+import 'package:loja_virtual_pro/models/product.dart';
 import 'package:provider/provider.dart';
-import '../../../models/product.dart';
 
 class SizeWidget extends StatelessWidget {
   const SizeWidget({super.key, required this.size});
@@ -32,7 +32,7 @@ class SizeWidget extends StatelessWidget {
         decoration: BoxDecoration(
             border: Border.all(
           color: color,
-        )),
+        ),),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[

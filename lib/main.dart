@@ -1,17 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:loja_virtual_pro/firebase_options.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:loja_virtual_pro/models/carManager.dart';
-import 'package:loja_virtual_pro/models/productManager.dart';
-import 'package:loja_virtual_pro/models/userManager.dart';
-import 'package:loja_virtual_pro/screens/base/baseScreen.dart';
-import 'package:loja_virtual_pro/screens/cart/cartScreen.dart';
-import 'package:loja_virtual_pro/screens/login/loginScreen.dart';
-import 'package:loja_virtual_pro/screens/product/productScreen.dart';
-import 'package:loja_virtual_pro/screens/signUp/signUpScreen.dart';
+import 'package:loja_virtual_pro/models/cart_manager.dart';
+import 'package:loja_virtual_pro/models/home_maneger.dart';
+import 'package:loja_virtual_pro/models/product.dart';
+import 'package:loja_virtual_pro/models/product_manager.dart';
+import 'package:loja_virtual_pro/models/user_manager.dart';
+import 'package:loja_virtual_pro/screens/base/base_screen.dart';
+import 'package:loja_virtual_pro/screens/cart/cart_screen.dart';
+import 'package:loja_virtual_pro/screens/login/login_screen.dart';
+import 'package:loja_virtual_pro/screens/product/product_screen.dart';
+import 'package:loja_virtual_pro/screens/signUp/sign_up_screen.dart';
 import 'package:provider/provider.dart';
-import 'models/product.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +36,11 @@ class MyApp extends StatelessWidget {
           create: (_) => ProductManager(),
           lazy: false,
         ),
-        ProxyProvider<UserManager, CartManager>(
+        ChangeNotifierProvider(
+          create: (_) => HomeManager(),
+          lazy: false,
+        ),
+        ChangeNotifierProxyProvider<UserManager, CartManager>(
           create: (_) => CartManager(),
           lazy: false,
           update: (_, userManager, cartManager) => 
@@ -59,13 +63,14 @@ class MyApp extends StatelessWidget {
 
             case '/product':
               return MaterialPageRoute(
-                  builder: (_) => ProductScreen(settings.arguments as Product));
+                  // ignore: cast_nullable_to_non_nullable
+                  builder: (_) => ProductScreen(settings.arguments as Product),);
 
             case '/signup':
               return MaterialPageRoute(builder: (_) => SignUpScreen());
 
             case '/cart':
-              return MaterialPageRoute(builder: (_) => CartScreen());
+              return MaterialPageRoute(builder: (_) => const CartScreen());
 
             case '/base':
             default:

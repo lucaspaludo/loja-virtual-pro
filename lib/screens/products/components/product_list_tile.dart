@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/product.dart';
+import 'package:loja_virtual_pro/models/product.dart';
 
 class ProductListTile extends StatelessWidget {
   final Product product;
@@ -38,7 +38,7 @@ class ProductListTile extends StatelessWidget {
                   Text(
                     product.name,
                     style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.w800),
+                        fontSize: 18, fontWeight: FontWeight.w800,),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4),
@@ -55,10 +55,10 @@ class ProductListTile extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w800,
-                        color: primaryColor),
+                        color: primaryColor,),
                   ),
                 ],
-              ))
+              ),)
             ],
           ),
         ),

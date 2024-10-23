@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserData {
-  UserData(
-      {required this.email,
-      required this.password,
-      required this.name,
-      required this.id,});
+  UserData({
+    required this.email,
+    required this.password,
+    required this.name,
+    required this.id,
+  });
 
   UserData.fromDocument(DocumentSnapshot document) {
     id = document.id;
@@ -17,6 +18,7 @@ class UserData {
   late String email;
   late String password;
   late String confirmPassword;
+  bool admin = false;
 
   DocumentReference get firestoreRef =>
       FirebaseFirestore.instance.doc('users/$id');

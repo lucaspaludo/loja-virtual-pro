@@ -79,6 +79,7 @@ class LoginScreen extends StatelessWidget {
                           return "Senha inválida";
                         }
                         return null;
+                      
                       },
                     ),
                     child!,

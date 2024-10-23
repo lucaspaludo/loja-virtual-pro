@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:loja_virtual_pro/firebase_options.dart';
+import 'package:loja_virtual_pro/models/admin_users_manager.dart';
 import 'package:loja_virtual_pro/models/cart_manager.dart';
 import 'package:loja_virtual_pro/models/home_maneger.dart';
 import 'package:loja_virtual_pro/models/product.dart';
@@ -8,6 +9,7 @@ import 'package:loja_virtual_pro/models/product_manager.dart';
 import 'package:loja_virtual_pro/models/user_manager.dart';
 import 'package:loja_virtual_pro/screens/base/base_screen.dart';
 import 'package:loja_virtual_pro/screens/cart/cart_screen.dart';
+import 'package:loja_virtual_pro/screens/edit_product/edit_product_screen.dart';
 import 'package:loja_virtual_pro/screens/login/login_screen.dart';
 import 'package:loja_virtual_pro/screens/product/product_screen.dart';
 import 'package:loja_virtual_pro/screens/signUp/sign_up_screen.dart';
@@ -46,6 +48,14 @@ class MyApp extends StatelessWidget {
           update: (_, userManager, cartManager) => 
             cartManager!..updateUser(userManager),
           ),
+
+         ChangeNotifierProxyProvider<UserManager, AdminUsersManager>(
+          
+          
+          create: (_) => AdminUsersManager(),
+          lazy: false,
+          update: (_, userManager, adminUsersManager) => 
+          adminUsersManager!..updateUser(userManager),) 
       ],
       child: MaterialApp(
         title: 'Loja do Lucas',
@@ -68,15 +78,17 @@ class MyApp extends StatelessWidget {
 
             case '/signup':
               return MaterialPageRoute(builder: (_) => SignUpScreen());
-
             case '/cart':
               return MaterialPageRoute(builder: (_) => const CartScreen());
+
+            case '/edit_product':
+              // ignore: cast_nullable_to_non_nullable
+              return MaterialPageRoute(builder: (_) => EditProductScreen(settings.arguments as Product),);
 
             case '/base':
             default:
               return MaterialPageRoute(builder: (_) => BaseScreen());
-
-            
+          
           }
         },
       ),

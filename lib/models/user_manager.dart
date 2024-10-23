@@ -6,6 +6,7 @@ import 'package:loja_virtual_pro/models/user.dart';
 
 class UserManager extends ChangeNotifier {
   UserManager() {
+    
     _loadCurrentUser();
   }
 
@@ -39,13 +40,18 @@ class UserManager extends ChangeNotifier {
     loading = false;
   }
 
-  Future<void> signUp(UserData user,
-      {required Function onFail, required Function onSucess,}) async {
+  Future<void> signUp(
+    UserData user, {
+    required Function onFail,
+    required Function onSucess,
+  }) async {
     loading = true;
     try {
       final UserCredential userCredential =
           await auth.createUserWithEmailAndPassword(
-              email: user.email, password: user.password,);
+        email: user.email,
+        password: user.password,
+      );
 
       user.id = userCredential.user!.uid;
       this.user = user;
@@ -57,7 +63,6 @@ class UserManager extends ChangeNotifier {
       // ignore: avoid_dynamic_calls
       onFail(getErrorString(e.code));
     }
-    
 
     loading = false;
   }
@@ -80,7 +85,16 @@ class UserManager extends ChangeNotifier {
       final DocumentSnapshot docUser =
           await firestore.collection('users').doc(currentUser.uid).get();
       user = UserData.fromDocument(docUser);
+
+      final docAdmin = await firestore.collection('admins').doc(user!.id).get();
+
+      if (docAdmin.exists) {
+        user!.admin = true;
+      }
+
       notifyListeners();
     }
   }
+
+  bool get adminEnabled => user != null && user!.admin;
 }

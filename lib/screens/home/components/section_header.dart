@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../models/section.dart';
+import 'package:loja_virtual_pro/models/section.dart';
 
 class SectionHeader extends StatelessWidget {
   const SectionHeader(this.section, {super.key});

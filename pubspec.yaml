@@ -46,6 +46,8 @@ dependencies:
   alphabet_list_scroll_view: ^2.0.0
   faker: ^2.1.0
   smooth_page_indicator: ^1.2.0+3
+  image_picker: ^1.0.4
+  image_cropper: ^4.0.1
 
 dev_dependencies:
   flutter_test:

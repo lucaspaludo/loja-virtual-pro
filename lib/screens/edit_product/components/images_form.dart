@@ -9,15 +9,12 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class ImagesForm extends StatefulWidget {
   final Product product;
   const ImagesForm(this.product, {super.key});
-  
-  
 
   @override
   _ImagesFormState createState() => _ImagesFormState();
 }
 
 class _ImagesFormState extends State<ImagesForm> {
- 
   final controller = CarouselController();
   int currentIndex = 0; // Variável para armazenar o índice da imagem atual
 
@@ -25,6 +22,10 @@ class _ImagesFormState extends State<ImagesForm> {
   Widget build(BuildContext context) {
     return FormField<List<dynamic>>(
       initialValue: List.from(widget.product.images),
+      validator: (images) {
+        if (images!.isEmpty) return 'Insira ao menos uma imagem';
+        return null;
+      },
       builder: (state) {
         void onImageSelected(File file) {
           state.value!.add(file);
@@ -37,7 +38,7 @@ class _ImagesFormState extends State<ImagesForm> {
             CarouselSlider.builder(
               carouselController: controller,
               // Aumenta o itemCount para incluir o botão de câmera
-              itemCount: widget.product.images.length + 1,
+              itemCount: state.value!.length + 1,
               itemBuilder: (context, index, realIndex) {
                 // Verifica se é o último item para exibir o IconButton
                 if (index == widget.product.images.length) {
@@ -94,10 +95,14 @@ class _ImagesFormState extends State<ImagesForm> {
                     Align(
                       alignment: Alignment.topRight,
                       child: IconButton(
-                        icon: const Icon(Icons.remove),
+                        icon: const Icon(Icons.delete),
                         color: Colors.red,
                         onPressed: () {
-                          // lógica de remover imagem
+                          setState(() {
+                            state.value!.remove(image);
+                            widget.product.images.remove(image);
+                            state.didChange(state.value);
+                          });
                         },
                       ),
                     )
@@ -115,6 +120,19 @@ class _ImagesFormState extends State<ImagesForm> {
                 },
               ),
             ),
+            if (state.hasError)
+              Container(
+                margin: const EdgeInsets.only(top: 16, left: 16),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  state.errorText ?? '',
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+
             const SizedBox(
               height: 16,
             ), // Espaçamento entre o carrossel e os pontinhos

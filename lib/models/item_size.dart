@@ -1,13 +1,18 @@
 class ItemSize {
-  ItemSize.fromMap(Map<String, dynamic> map) {
-    name = map['name'] as String;
-    price = map['price'] as num;
-    stock = map['stock'] as int;
-  }
+  String name;
+  num price;
+  int stock;
 
-  late String name;
-  late num price;
-  late int stock;
+  ItemSize({
+    this.name = '',
+    this.price = 0,
+    this.stock = 0,
+  });
+
+  ItemSize.fromMap(Map<String, dynamic> map)
+      : name = map['name'] as String,
+        price = map['price'] as num,
+        stock = map['stock'] as int;
 
   bool get hasStock => stock > 0;
 

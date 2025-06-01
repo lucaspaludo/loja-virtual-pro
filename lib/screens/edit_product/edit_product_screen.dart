@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:loja_virtual_pro/models/product.dart';
 import 'package:loja_virtual_pro/screens/edit_product/components/images_form.dart';
 
+import 'components/sizes_form.dart';
+
 class EditProductScreen extends StatelessWidget {
   final Product product;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -9,6 +11,7 @@ class EditProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color primaryColor = Theme.of(context).primaryColor;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Editar Anúncio'),
@@ -52,7 +55,8 @@ class EditProductScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'R\$ ${product.basePrice.toStringAsFixed(2)}',
+                    //'R\$ ${product.basePrice.toStringAsFixed(2)}',
+                    '...',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -84,18 +88,12 @@ class EditProductScreen extends StatelessWidget {
                       return null;
                     },
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 16, bottom: 8),
-                    child: Text(
-                      'Tamanhos',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                  
+                  SizesForm(product),
                   ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(primaryColor),
+                    ),
+                    
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         print('Válido');

@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual_pro/models/product.dart';
 import 'package:loja_virtual_pro/screens/edit_product/components/images_form.dart';
-
-import 'components/sizes_form.dart';
+import 'package:loja_virtual_pro/screens/edit_product/components/sizes_form.dart';
 
 class EditProductScreen extends StatelessWidget {
   final Product product;
+  final bool editing;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  EditProductScreen(this.product, {super.key});
+  EditProductScreen(Product? p, {super.key}) : 
+    editing = p != null,
+    product = p?.clone() ?? Product.empty();
 
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = Theme.of(context).primaryColor;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Editar Anúncio'),
+        title: Text(editing ? 'Editar Anúncio' : 'Criar Anúncio'),
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
       ),
@@ -89,17 +91,23 @@ class EditProductScreen extends StatelessWidget {
                     },
                   ),
                   SizesForm(product),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(primaryColor),
+                  SizedBox(
+                    height: 44,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(primaryColor),
+                      ),
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          print('Válido');
+                        }
+                      },
+                      child: const Text(
+                        'Salvar',
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
-                    
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        print('Válido');
-                      }
-                    },
-                    child: const Text('Salvar'),
                   ),
                 ],
               ),

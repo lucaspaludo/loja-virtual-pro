@@ -45,17 +45,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProxyProvider<UserManager, CartManager>(
           create: (_) => CartManager(),
           lazy: false,
-          update: (_, userManager, cartManager) => 
-            cartManager!..updateUser(userManager),
-          ),
-
-         ChangeNotifierProxyProvider<UserManager, AdminUsersManager>(
-          
-          
+          update: (_, userManager, cartManager) =>
+              cartManager!..updateUser(userManager),
+        ),
+        ChangeNotifierProxyProvider<UserManager, AdminUsersManager>(
           create: (_) => AdminUsersManager(),
           lazy: false,
-          update: (_, userManager, adminUsersManager) => 
-          adminUsersManager!..updateUser(userManager),) 
+          update: (_, userManager, adminUsersManager) =>
+              adminUsersManager!..updateUser(userManager),
+        )
       ],
       child: MaterialApp(
         title: 'Loja do Lucas',
@@ -73,8 +71,9 @@ class MyApp extends StatelessWidget {
 
             case '/product':
               return MaterialPageRoute(
-                  // ignore: cast_nullable_to_non_nullable
-                  builder: (_) => ProductScreen(settings.arguments as Product),);
+                // ignore: cast_nullable_to_non_nullable
+                builder: (_) => ProductScreen(settings.arguments as Product),
+              );
 
             case '/signup':
               return MaterialPageRoute(builder: (_) => SignUpScreen());
@@ -82,13 +81,16 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => const CartScreen());
 
             case '/edit_product':
+              final product = settings.arguments as Product?;
               // ignore: cast_nullable_to_non_nullable
-              return MaterialPageRoute(builder: (_) => EditProductScreen(settings.arguments as Product),);
+              return MaterialPageRoute(
+                builder: (_) =>
+                    EditProductScreen(product),
+              );
 
             case '/base':
             default:
               return MaterialPageRoute(builder: (_) => BaseScreen());
-          
           }
         },
       ),

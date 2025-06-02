@@ -3,6 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:loja_virtual_pro/models/item_size.dart';
 
 class Product extends ChangeNotifier {
+  Product(
+      {required this.id,
+      required this.name,
+      required this.description,
+      required this.images,
+      required this.sizes});
+
+  Product.empty()
+      : id = '',
+        name = '',
+        description = '',
+        images = [],
+        sizes = [];
+
+        
   Product.fromDocument(DocumentSnapshot document) {
     id = document.id;
     name = document['name'] as String;
@@ -56,5 +71,15 @@ class Product extends ChangeNotifier {
     } catch (e) {
       return null;
     }
+  }
+
+  Product clone() {
+    return Product(
+      id: id,
+      name: name,
+      description: description,
+      images: List.from(images),
+      sizes: sizes.map((size) => size.clone()).toList(),
+    );
   }
 }

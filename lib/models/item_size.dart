@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class ItemSize {
   String name;
   num price;
@@ -15,6 +17,14 @@ class ItemSize {
         stock = map['stock'] as int;
 
   bool get hasStock => stock > 0;
+
+  ItemSize clone() {
+    return ItemSize(
+      name: name,
+      price: price,
+      stock: stock,
+    );
+  }
 
   @override
   String toString() {

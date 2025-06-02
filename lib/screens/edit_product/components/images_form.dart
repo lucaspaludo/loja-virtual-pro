@@ -21,7 +21,7 @@ class _ImagesFormState extends State<ImagesForm> {
   @override
   Widget build(BuildContext context) {
     return FormField<List<dynamic>>(
-      initialValue: List.from(widget.product.images),
+      initialValue: widget.product.images,
       validator: (images) {
         if (images!.isEmpty) return 'Insira ao menos uma imagem';
         return null;

@@ -65,6 +65,6 @@ class CartProduct extends ChangeNotifier {
   bool get hasStock {
     final size = itemSize;
     if(size == null) return false;
-    return size.stock >= quantity;
+    return size.stock! >= quantity;
   }
 }

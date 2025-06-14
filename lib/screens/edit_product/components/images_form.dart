@@ -16,20 +16,25 @@ class ImagesForm extends StatefulWidget {
 
 class _ImagesFormState extends State<ImagesForm> {
   final controller = CarouselController();
-  int currentIndex = 0; // Variável para armazenar o índice da imagem atual
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return FormField<List<dynamic>>(
-      initialValue: widget.product.images,
+      initialValue: List.from(widget.product.images),
       validator: (images) {
         if (images!.isEmpty) return 'Insira ao menos uma imagem';
         return null;
       },
+      onSaved: (images) => widget.product.newImages = images,
       builder: (state) {
         void onImageSelected(File file) {
           state.value!.add(file);
+          
           state.didChange(state.value);
+          setState(() {
+            
+          });
           Navigator.of(context).pop();
         }
 
@@ -41,7 +46,7 @@ class _ImagesFormState extends State<ImagesForm> {
               itemCount: state.value!.length + 1,
               itemBuilder: (context, index, realIndex) {
                 // Verifica se é o último item para exibir o IconButton
-                if (index == widget.product.images.length) {
+                if (index == state.value!.length) {
                   return Container(
                     width: MediaQuery.of(context)
                         .size
@@ -68,7 +73,7 @@ class _ImagesFormState extends State<ImagesForm> {
                 }
 
                 // Caso contrário, exibe as imagens normalmente
-                final image = widget.product.images[index];
+                final image = state.value![index];
                 return Stack(
                   children: <Widget>[
                     Container(
@@ -139,7 +144,7 @@ class _ImagesFormState extends State<ImagesForm> {
             AnimatedSmoothIndicator(
               activeIndex: currentIndex,
               // Atualiza o contador para incluir o botão de câmera
-              count: widget.product.images.length + 1,
+              count: state.value!.length + 1,
               effect: const ScrollingDotsEffect(
                 dotWidth: 10.0,
                 dotHeight: 10.0,

@@ -7,16 +7,16 @@ class EditProductScreen extends StatelessWidget {
   final Product product;
   final bool editing;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  EditProductScreen(Product? p, {super.key}) : 
-    editing = p != null,
-    product = p?.clone() ?? Product.empty();
+  EditProductScreen(Product? p, {super.key})
+      : editing = p != null,
+        product = p?.clone() ?? Product.empty();
 
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = Theme.of(context).primaryColor;
     return Scaffold(
       appBar: AppBar(
-        title: Text(editing ? 'Editar Anúncio' : 'Criar Anúncio'),
+        title: Text(editing ? 'Editar Produto' : 'Criar Produto'),
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
       ),
@@ -45,6 +45,7 @@ class EditProductScreen extends StatelessWidget {
                       if (name!.length < 6) return 'Título muito curto';
                       return null;
                     },
+                    onSaved: (name) => product.name = name!,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8),
@@ -89,6 +90,7 @@ class EditProductScreen extends StatelessWidget {
                       if (desc!.length < 10) return 'Descirção muito curta';
                       return null;
                     },
+                    onSaved: (desc) => product.description = desc!,
                   ),
                   SizesForm(product),
                   SizedBox(
@@ -100,7 +102,8 @@ class EditProductScreen extends StatelessWidget {
                       ),
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          print('Válido');
+                          formKey.currentState?.save();
+                          product.save();
                         }
                       },
                       child: const Text(

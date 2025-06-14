@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:loja_virtual_pro/models/item_size.dart';
 
 class Product extends ChangeNotifier {
-  Product(
-      {required this.id,
-      required this.name,
-      required this.description,
-      required this.images,
-      required this.sizes});
+  Product({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.images,
+    required this.sizes,
+  });
 
   Product.empty()
       : id = '',
@@ -17,7 +18,6 @@ class Product extends ChangeNotifier {
         images = [],
         sizes = [];
 
-        
   Product.fromDocument(DocumentSnapshot document) {
     id = document.id;
     name = document['name'] as String;
@@ -28,11 +28,14 @@ class Product extends ChangeNotifier {
         .toList();
   }
 
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  DocumentReference get firestoreRef => firestore.doc('products/$id');
   late String id;
   late String name;
   late String description;
   late List<String> images;
   late List<ItemSize> sizes;
+  List<dynamic>? newImages;
   ItemSize? _selectedSize;
 
   ItemSize? get selectedSize => _selectedSize;
@@ -45,7 +48,7 @@ class Product extends ChangeNotifier {
   int get totalStock {
     int stock = 0;
     for (final size in sizes) {
-      stock += size.stock;
+      stock += size.stock!;
     }
     return stock;
   }
@@ -58,8 +61,8 @@ class Product extends ChangeNotifier {
     num lowest = double.infinity;
 
     for (final size in sizes) {
-      if (size.price < lowest && size.hasStock) {
-        lowest = size.price;
+      if (size.price! < lowest && size.hasStock) {
+        lowest = size.price!;
       }
     }
     return lowest;
@@ -73,6 +76,25 @@ class Product extends ChangeNotifier {
     }
   }
 
+  List<Map<String, dynamic>> exportSizeList() {
+    return sizes.map((size) => size.toMap()).toList();
+  }
+
+  Future<void> save() async {
+    final Map<String, dynamic> data = {
+      'name': name,
+      'description': description,
+      'sizes': exportSizeList(),
+    };
+
+    if (id == null) {
+      final doc = await firestore.collection('products').add(data);
+      id = doc.id;
+    } else {
+      await firestoreRef.update(data);
+    }
+  }
+
   Product clone() {
     return Product(
       id: id,
@@ -81,5 +103,10 @@ class Product extends ChangeNotifier {
       images: List.from(images),
       sizes: sizes.map((size) => size.clone()).toList(),
     );
+  }
+
+  @override
+  String toString() {
+    return 'Product{id: $id, name: $name, description: $description, images: $images, sizes: $sizes, newImage: $newImages}';
   }
 }

@@ -47,7 +47,7 @@ class SizeWidget extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                'R\$ ${size.price.toStringAsFixed(2)}',
+                'R\$ ${size.price?.toStringAsFixed(2)}',
                 style: TextStyle(
                   color: color,
                 ),

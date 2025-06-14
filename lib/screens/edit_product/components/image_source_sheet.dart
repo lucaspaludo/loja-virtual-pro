@@ -24,10 +24,10 @@ class ImageSourceSheet extends StatelessWidget {
       ],
     );
     if (croppedFile != null) {
-      onImageSelected(croppedFile as File);
+      onImageSelected(File(croppedFile.path));
     }
   }
-  
+
   //TODO: Melhorar image crop
 
   @override
@@ -41,8 +41,9 @@ class ImageSourceSheet extends StatelessWidget {
           ElevatedButton(
             onPressed: () async {
               final file = await picker.pickImage(source: ImageSource.camera);
+              if (file == null) return;
               // ignore: use_build_context_synchronously
-              editImage(file!.path, context);
+              editImage(file.path, context);
             },
             child: const Text('Câmera'),
           ),

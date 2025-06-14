@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class ItemSize {
   String name;
-  num price;
-  int stock;
+  num? price;
+  int? stock;
 
   ItemSize({
     this.name = '',
@@ -16,7 +16,7 @@ class ItemSize {
         price = map['price'] as num,
         stock = map['stock'] as int;
 
-  bool get hasStock => stock > 0;
+  bool get hasStock => stock! > 0;
 
   ItemSize clone() {
     return ItemSize(
@@ -24,6 +24,14 @@ class ItemSize {
       price: price,
       stock: stock,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'price': price,
+      'stock': stock,
+    };
   }
 
   @override

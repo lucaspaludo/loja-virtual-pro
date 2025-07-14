@@ -30,11 +30,9 @@ class _ImagesFormState extends State<ImagesForm> {
       builder: (state) {
         void onImageSelected(File file) {
           state.value!.add(file);
-          
+
           state.didChange(state.value);
-          setState(() {
-            
-          });
+          setState(() {});
           Navigator.of(context).pop();
         }
 
@@ -105,8 +103,8 @@ class _ImagesFormState extends State<ImagesForm> {
                         onPressed: () {
                           setState(() {
                             state.value!.remove(image);
-                            widget.product.images.remove(image);
                             state.didChange(state.value);
+                            widget.product.newImages = state.value;
                           });
                         },
                       ),

@@ -30,10 +30,10 @@ class ProductManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  Product? findProductById(String id){
+  Product? findProductById(String id) {
     try {
       return allProducts.firstWhere((p) => p.id == id);
-    } catch (e){
+    } catch (e) {
       return null;
     }
   }
@@ -44,9 +44,17 @@ class ProductManager extends ChangeNotifier {
     if (search.isEmpty) {
       filteredProducts.addAll(allProducts);
     } else {
-      filteredProducts.addAll(allProducts
-          .where((p) => p.name.toLowerCase().contains(search.toLowerCase())),);
+      filteredProducts.addAll(
+        allProducts
+            .where((p) => p.name.toLowerCase().contains(search.toLowerCase())),
+      );
     }
     return filteredProducts;
+  }
+
+  void update(Product product) {
+    allProducts.removeWhere((p) => p.id == product.id);
+    allProducts.add(product);
+    notifyListeners();
   }
 }

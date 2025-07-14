@@ -48,6 +48,8 @@ dependencies:
   smooth_page_indicator: ^1.2.0+3
   image_picker: ^1.0.4
   image_cropper: ^4.0.1
+  uuid: ^4.1.0
+  firebase_app_check: ^0.2.1+8
 
 dev_dependencies:
   flutter_test:

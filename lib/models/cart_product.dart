@@ -18,8 +18,15 @@ class CartProduct extends ChangeNotifier {
 
     firestore.doc('products/$productId').get().then(
       (doc) {
-        product = Product.fromDocument(doc);
-        notifyListeners();
+        if (doc.exists) {
+          product = Product.fromDocument(doc);
+          notifyListeners();
+        } else {
+          debugPrint(
+              'Produto $productId não encontrado no Firestore. Removendo do carrinho.');
+          // product continua null
+          // você pode eventualmente remover esse item do carrinho com lógica adicional
+        }
       },
     );
   }
@@ -64,7 +71,7 @@ class CartProduct extends ChangeNotifier {
 
   bool get hasStock {
     final size = itemSize;
-    if(size == null) return false;
+    if (size == null) return false;
     return size.stock! >= quantity;
   }
 }

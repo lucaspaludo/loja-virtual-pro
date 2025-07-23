@@ -6,6 +6,8 @@ import 'package:loja_virtual_pro/screens/home/components/section_list.dart';
 import 'package:loja_virtual_pro/screens/home/components/section_staggered.dart';
 import 'package:provider/provider.dart';
 
+import 'components/add_section_widget.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -85,6 +87,10 @@ class HomeScreen extends StatelessWidget {
                         return Container();
                     }
                   }).toList();
+
+                  if (homeManager.editing) {
+                    children.add(AddSectionWidget(homeManager));
+                  }
                   return SliverList(
                     delegate: SliverChildListDelegate(children),
                   );

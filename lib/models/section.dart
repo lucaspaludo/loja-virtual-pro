@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:loja_virtual_pro/models/section_item.dart';
 
 class Section {
-  Section({required this.name, required this.type, required this.items});
+  Section({required this.name, required this.type, required this.items}) {
+    items = items ?? [];
+  };
   Section.fromDocument(DocumentSnapshot document) {
     name = document['name'] as String;
     type = document['type'] as String;
@@ -17,7 +19,11 @@ class Section {
   late List<SectionItem> items;
 
   Section clone() {
-    return Section(name: name, type: type, items: items);
+    return Section(
+      name: name, 
+      type: type, 
+      items: items.map((e) => e.clone()).toList(),
+    );
   }
 
   @override
